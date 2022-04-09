@@ -4,72 +4,7 @@
 
 {% block body %}
 <style>
-    .fromInput{
-       
-        margin: 0 auto;
-        width:60%;
-        color:white;
-    }
-    .page-header{
-        text-align:center;
-        margin: 0 auto;
-        width:30%;
-        padding:20px;
-        margin-top:30px;
-        border-radius: 20px;
-      
-    }
-    body{
-    
-          background-image: linear-gradient(#054afa, #244db5,#263b70,#1e2945,#0f1014);
-      
-    }
-                  
-            @media screen and (max-width:  1400px
-) {
-          .fromInput  {
-         width: 80% !important;
-         
-    }
-}
-          @media screen and (max-width:  1200px) {
-          .fromInput {
-         width: 80% !important;
-         
-    }
-}
-          @media screen and (max-width: 992px) {
-          .fromInput {
-         width: 80% !important;
-       
-    }
-}
-          @media screen and (max-width: 768px) {
-           .fromInput {
-         width: 80% !important;
-        
-    }
-}
-
-            @media screen and (max-width: 578px) {
-                       .fromInput{
-                    width: 80% !important;
-                   
-                }
-            }
-
-            @media screen and (max-width: 480px) {
-                        .fromInput {
-                    width: 80% !important;
-                    
-                }
-            }
-            @media screen and (max-width: 320px) {
-                       .fromInput {
-                    width: 80% !important;
-                   
-                }
-            }
+  
 </style>
 
 
@@ -80,7 +15,7 @@
 
 
 
- <h2 class="page-header bg-info">Add Event</h2>
+ <h2 class="page-header text-light p-3">Add Event</h2>
  <div class="fromInput col-lg-12 col-md-6 col-sm-12 col-xs-12">
  {{form_start(form)}} 
  {{form_widget(form)}}

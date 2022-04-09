@@ -9,6 +9,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Event;
 use App\Form\EventType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 
 class EventController extends AbstractController
@@ -76,7 +78,7 @@ class EventController extends AbstractController
         ]);
     }
     #[Route('/edit/{id}', name: 'edit_event')]
-    public function editEvent(Request $request,$id,ManagerRegistry $doctrine): Response
+    public function editEvent(Request $request,$id,ManagerRegistry $doctrine,FileUploader $fileUploader): Response
     {
        
         $event = $doctrine->getManager()->getRepository(Event::class)->find($id);
@@ -85,13 +87,18 @@ class EventController extends AbstractController
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
-            
+            $pictureFile = $form->get('picture')->getData();
+            //pictureUrl is the name given to the input field
+            if ($pictureFile) {
+            $pictureFileName = $fileUploader->upload($pictureFile);
+            $event->setPicture($pictureFileName);
+            }
             $event = $form->getData();
             //  dd($product);
             $em = $doctrine->getManager();
             $em ->persist($event);
             $em->flush();
-            $this->addFlash("success", "The Product has been updated");
+            $this->addFlash("success", "The Event has been updated");
 
             return $this->redirectToRoute("event_event");
         }
@@ -115,21 +122,29 @@ class EventController extends AbstractController
         return $this->redirectToRoute('home_event');
     }
     #[Route('/filter', name: 'filter_event')]
-    public function filterEvent( ManagerRegistry $doctrine): Response
+    public function filterEvent( ManagerRegistry $doctrine, Request $request): Response
     {
+      
         $type =["Music","Sport","Movie","Theater"];
-        $repository =  $doctrine->getRepository(Event::class);
-        $events = $repository->findBy(array('type'=> array('Music','Sport','Movie','Theater')));
+        // $em= $doctrine->getManager();
+        // $events = $em->getRepository(Event::class)->findAll();
+        // if($request->isMethod(method:"POST"))
+        // {
+        //     $type = $request->get(key:'type');
+        //     $repository =$em->getRepository(Event::class);
+        //     $events = $repository->findBy(array('type'=>$type));
+            
+        // }
+            $em= $doctrine->getManager();
+            $events = $em->getRepository(Event::class)->findBy(['type' => $type[2]]);
 
-        // dd($event);
+
+        // dd($events);
        
         return $this->render('event/filter.html.twig', [
-            "events" => $events,
-            
-
+           
+            'events' => $events
         ]);
-
-         return $this->redirectToRoute('home_event');
-    }
-
+    
+}
 }
