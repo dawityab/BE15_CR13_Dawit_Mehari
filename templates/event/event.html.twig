@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello EventController!{% endblock %}
+
+{% block body %}
+<style>
+ .card-img-top{
+                float: left;
+                width: 100%;
+                height: 300px;
+                -o-object-fit: cover;
+                object-fit: cover;
+             
+            }
+ .container{
+                margin: 0 auto;
+                width:60%;
+ }
+            
+
+              .card, {
+         width: 100% !important;
+    }
+}
+          @media screen and (max-width:  1200px) {
+             .card {
+         width: 100% !important;
+    }
+}
+          @media screen and (max-width: 992px) {
+             .card {
+         width: 100% !important;
+    }
+}
+          @media screen and (max-width: 768px) {
+             .card {
+         width: 100% !important;
+    }
+}
+
+@media screen and (max-width: 578px) {
+           .card{
+         width: 100% !important;
+    }
+}
+
+@media screen and (max-width: 480px) {
+           .card {
+         width: 100% !important;
+    }
+}
+@media screen and (max-width: 320px) {
+            .card {
+         width: 100% !important;
+    }
+}
+
+  </style>
+
+
+  <div class="container mt-4">
+        <div class="row">
+        <h1>{{eventTitle}}</h1>
+
+     {% for event in events %}  
+
+<div class='col-lg-6 col-md-6 col-sm-12'>
+        <div class='card m-2 ' style='width: 18rem;'>
+    
+      <img src="{{asset('pictures/' ~ event.picture )}}" class='card-img-top' alt="{{event.name}}">
+      <div class='card-body'>
+        <h4 class='card-title bg-secondary text-light p-2'>{{event.name}}</h4>
+        <h6 class='card-title  text-muted '>{{event.date|date('F j, Y, g:i a')}}</h6>
+        
+        <a href="/details/{{event.id}}" class="btn btn-success">View</a>     
+        <a href="/edit/{{event.id}}" class="btn btn-default">Edit</a>
+        <a href="/delete/{{event.id}}" class="btn btn-danger">Delete</a>       
+        </div>
+    </div>
+</div>
+      {% endfor %}
+      
+       </div>
+    </div>
+{% endblock %}
