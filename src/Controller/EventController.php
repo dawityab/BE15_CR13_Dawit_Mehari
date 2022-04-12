@@ -121,22 +121,13 @@ class EventController extends AbstractController
 
         return $this->redirectToRoute('home_event');
     }
-    #[Route('/filter', name: 'filter_event')]
-    public function filterEvent( ManagerRegistry $doctrine, Request $request): Response
+    #[Route('/filter/{type}', name: 'filter_event')]
+    public function filterEvent($type, ManagerRegistry $doctrine, Request $request): Response
     {
       
-        $type =["Music","Sport","Movie","Theater"];
-        // $em= $doctrine->getManager();
-        // $events = $em->getRepository(Event::class)->findAll();
-        // if($request->isMethod(method:"POST"))
-        // {
-        //     $type = $request->get(key:'type');
-        //     $repository =$em->getRepository(Event::class);
-        //     $events = $repository->findBy(array('type'=>$type));
-            
-        // }
+     
             $em= $doctrine->getManager();
-            $events = $em->getRepository(Event::class)->findBy(['type' => $type[2]]);
+            $events = $em->getRepository(Event::class)->findBy(['type' => $type]);
 
 
         // dd($events);

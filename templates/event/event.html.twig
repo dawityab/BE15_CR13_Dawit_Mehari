@@ -51,6 +51,23 @@ body{
 
   <div class="container mt-4">
         <div class="row">
+        <div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+   Filter
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+    <li><a class="dropdown-item" href="/filter/Sport">Sport</a></li>
+    <li><a class="dropdown-item" href="/filter/Movie">Movie</a></li>
+    <li><a class="dropdown-item" href="/filter/Music">Music</a></li>
+  </ul>
+</div>
+       
+         </div>
+        </div>
+
+
+  <div class="container mt-4">
+        <div class="row">
         <h1 class="text-light p-3">{{eventTitle}}</h1>
 
      {% for event in events %}  
